@@ -507,13 +507,6 @@ class LogisticsRobotController(Node):
         twist = Twist()
         
         distance_error = self.marker_distance - self.target_distance
-        # if abs(distance_error) > self.distance_tolerance * 4:
-        #     self.state = RobotState.APPROACHING
-        #     self.state_change_counter = 0
-        #     delattr(self, 'align_start_time')
-        #     self.reset_integrals()
-        #     self.get_logger().info('Distance too far, returning to approach mode...')
-        #     return
         
         lateral_error = self.marker_lateral
         angle_error = self.marker_pitch
