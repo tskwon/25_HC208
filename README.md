@@ -173,3 +173,49 @@ int getFilteredYState(int i) {
 }
 
 ```
+
+- 소스코드 설명 : 로봇팔 카메라 좌표변환 코드 입니다.
+```
+로봇 좌표계와 카메라 좌표계간 캘리브레이션을 통해 좌표변환을 수행하는 코드 입니다.
+
+def camera_to_robot_coordinates(self, pixel_x, pixel_y, angle_deg):
+        # Bilinear 보간
+        # robot_x = (1 / 15) * pixel_y - (113 / 15) - 0.5
+        # robot_y = (-19 / 286) * pixel_x + (12697 / 286) + 0.3
+        
+        
+        robot_x = (1 / 15) * (pixel_y - 113)
+        robot_y = (-19 / 286) * (pixel_x - 668.263) 
+
+
+        return robot_x, robot_y, angle_deg - 180.0
+
+```
+
+- 소스코드 설명 : 전체 시스템 제어 적용 코드입니다. 상태머신으로 차체 리프트 로봇팔 노드를 효율적으로 관리하여 동작합니다.
+```
+메인 제어는 각 상태에서 해당 노드로 실행 명령을 전송하고, 동작 완료 신호를 수신하는 구조로 구성되어 있습니다.
+완료 신호를 받으면 다음 상태로 이동하여 순차적으로 동작을 수행합니다.
+
+class MissionState(Enum):
+    IDLE = 0
+    ROBOT_MOVING = 1
+    WAITING_ROBOT_COMPLETE = 2
+    LIFT_OPERATING = 3
+    WAITING_LIFT_COMPLETE = 4
+    YOLO_DETECTING = 5
+    WAITING_YOLO_COMPLETE = 6
+    ROBOT_ARM_MOVING = 7
+    WAITING_ROBOT_ARM_COMPLETE = 8
+    LIFT_UP_OPERATING = 9
+    WAITING_LIFT_UP_COMPLETE = 10
+    LIFT_DOWN_OPERATING = 11
+    WAITING_LIFT_DOWN_COMPLETE = 12
+    ROBOT_ARM_DELIVERY = 13
+    WAITING_ROBOT_ARM_DELIVERY_COMPLETE = 14
+    MISSION_COMPLETE = 15
+    WATING_LIFT_RETURN_COMPLETE = 16
+
+
+```
+- 
