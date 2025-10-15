@@ -58,6 +58,54 @@
 
 ---
 ## **💡5. 핵심 소스코드**
+- 소스코드 설명 : 차체 제어 적용 코드입니다. 상태머신으로 각 상태를 효율적으로 관리하여 동작합니다.
+```
+ def control_loop(self):
+        if self.state == RobotState.IDLE:
+            self.stop_robot()
+            return
+
+        // 초기화
+        if self.target_id is None or self.target_distance is None:
+            if self.state != RobotState.IDLE:
+                self.get_logger().info('Missing target information, returning to IDLE state')
+                self.state = RobotState.IDLE
+                self.state_change_counter = 0
+                self.reset_integrals()
+            self.stop_robot()
+            return
+        
+        current_time = self.get_clock().now()
+
+        // 예외 조건
+        if self.state not in [RobotState.FINISHED, RobotState.SEARCH_TIMEOUT, RobotState.WAITING_NEXT_SEQUENCE]:
+            if (current_time - self.last_pose_time).nanoseconds / 1e9 > self.pose_timeout:
+                if self.state != RobotState.SEARCHING:
+                    self.get_logger().warn(f'Target marker {self.target_id} lost! Searching again...')
+                    self.state = RobotState.SEARCHING
+                    self.state_change_counter = 0
+                    self.search_start_left_encoder = self.left_encoder
+                    self.search_start_right_encoder = self.right_encoder
+                    self.current_rotation_angle = 0.0
+                    self.reset_integrals()
+                self.search_behavior()
+                return
+
+        // 상태머신으로 차체 주행을 제어
+        if self.state == RobotState.SEARCHING:
+            self.search_behavior()
+        elif self.state == RobotState.APPROACHING:
+            self.approach_behavior()
+        elif self.state == RobotState.ALIGNING:
+            self.align_behavior()
+        elif self.state == RobotState.FINISHED:
+            self.finish_behavior()
+        elif self.state == RobotState.SEARCH_TIMEOUT:
+            self.search_timeout_behavior()
+        elif self.state == RobotState.WAITING_NEXT_SEQUENCE:
+            self.waiting_next_sequence_behavior()
+```
+
 - 소스코드 설명 : 리프트 동작및 노이즈 제거를 위한 EMA 필터 적용 코드입니다.
 
 ```
