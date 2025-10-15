@@ -54,8 +54,7 @@
 ---
 ## **💡4. 작품 소개영상**
 
-[![한이음 드림업 프로젝트 소개](https://www.youtube.com/watch?v=oBhbYQAAHrw))
-
+[![한이음 드림업 프로젝트 소개](https://img.youtube.com/vi/oBhbYQAAHrw/mqdefault.jpg)](https://www.youtube.com/watch?v=oBhbYQAAHrw)
 
 ---
 ## **💡5. 핵심 소스코드**
