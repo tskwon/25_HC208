@@ -191,6 +191,42 @@ def camera_to_robot_coordinates(self, pixel_x, pixel_y, angle_deg):
         return robot_x, robot_y, angle_deg - 180.0
 
 ```
+- 소스코드 설명 : 로봇팔 역기구학 해석 코드입니다.
+```
+해당 함수에 좌표를 입력하면 역기구학 해석을 통해 각도값을 얻는 코드입니다.
+
+JointAngles inverseKinematics(double x, double y) {
+        double x_2 = x;
+        x = std::abs(x);
+        y = std::abs(y);
+        
+        double D = (x*x + y*y - L1*L1 - L2*L2) / (2 * L1 * L2);
+        
+        if (std::abs(D) > 1) {
+            throw std::runtime_error("도달불가");
+        }
+        
+        double theta2_rad = std::acos(D);
+        double theta2_deg = 180 - theta2_rad * 180.0 / M_PI;
+        
+        double theta1_rad = std::atan2(y, x) - std::atan2(L2*std::sin(theta2_rad), L1 + L2*std::cos(theta2_rad));
+        double theta1_deg = theta1_rad * 180.0 / M_PI;
+        
+        double theta3_deg = theta2_deg - theta1_deg;
+
+        if (x_2 < 0) {
+            theta1_deg *= -1;
+            theta2_deg = 180 + theta2_deg;
+            theta3_deg = 180 - theta3_deg;
+        }
+        
+        if (theta1_deg < -90 || theta1_deg > 90) {
+            throw std::runtime_error("Joint1 범위 초과: θ1 = " + std::to_string(theta1_deg) + "°");
+        }
+        
+        return {theta1_deg, theta2_deg, theta3_deg};
+    }
+```
 
 - 소스코드 설명 : 전체 시스템 제어 적용 코드입니다. 상태머신으로 차체 리프트 로봇팔 노드를 효율적으로 관리하여 동작합니다.
 ```
