@@ -31,7 +31,7 @@
 ---
 
 ## **💡2. 팀원 소개**
-| <img width="720" height="960" alt="image" src="https://github.com/user-attachments/assets/251448c4-658b-41ce-9420-67070ff92e62" />|
+<img width="720" height="960" alt="image" src="https://github.com/user-attachments/assets/251448c4-658b-41ce-9420-67070ff92e62" />
 
 | **권태수** | **김상준** | **원태연** | **이재웅** | **박철** |
 | :---: | :---: | :---: | :---: | :---: |
