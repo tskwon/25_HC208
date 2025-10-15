@@ -43,24 +43,18 @@
 ## **💡3. 시스템 구성도**
 
 - 시스템 구성도도
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/28fc8453-d1a0-4184-8fd0-130d93d18545" />
+<img width="695" height="572" alt="image" src="https://github.com/user-attachments/assets/b173342b-a108-4cbf-b5fb-85bbd89bf9b0" />
 
 
 - 플로우 차트
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/76e3347b-6d94-491e-8aeb-a7b4601c54d5" />
+<img width="695" height="572" alt="image" src="https://github.com/user-attachments/assets/604e2391-48dd-4c9d-9e32-73d98ed06720" />
+
 
 
 ---
 ## **💡4. 작품 소개영상**
-> **참고**: 썸네일과 유튜브 영상을 등록하는 방법입니다.
-```Python
-아래와 같이 작성하면, 썸네일과 링크등록을 할 수 있습니다.
-[![영상 제목](유튜브 썸네일 URL)](유튜브 영상 URL)
 
-작성 예시 : 저는 다음과 같이 작성하니, 아래와 같이 링크가 연결된 썸네일 이미지가 등록되었네요! 
-[![한이음 드림업 프로젝트 소개](https://github.com/user-attachments/assets/16435f88-e7d3-4e45-a128-3d32648d2d84)](https://youtu.be/YcD3Lbn2FRI?si=isERqIAT9Aqvdqwp)
-```
-[![한이음 드림업 프로젝트 소개](https://github.com/user-attachments/assets/16435f88-e7d3-4e45-a128-3d32648d2d84)]([https://youtu.be/YcD3Lbn2FRI?si=isERqIAT9Aqvdqwp](http://youtube.com/watch?si=djJINzoDOdAHgMP9&v=oBhbYQAAHrw&feature=youtu.be))
+[![한이음 드림업 프로젝트 소개](https://youtu.be/oBhbYQAAHrw?si=djJINzoDOdAHgMP9))
 
 
 ---
